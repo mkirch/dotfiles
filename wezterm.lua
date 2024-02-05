@@ -5,21 +5,21 @@ local wezterm = require("wezterm")
 local config = {}
 
 if wezterm.config_builder then
-    config = wezterm.config_builder()
+	config = wezterm.config_builder()
 end
 -------------------------------------------------------------------------------
 -- Color Schemes
 -------------------------------------------------------------------------------
 -- config.color_scheme = "AdventureTime"
-config.color_scheme = "ayu"
+-- config.color_scheme = "ayu"
 -- config.color_scheme = "Ayu Dark"
--- config.color_scheme = "Ayu Dark (Gogh)"
+config.color_scheme = "Ayu Dark (Gogh)"
 -- config.color_scheme = "Ayu Mirage"
 -- config.color_scheme = "ayu_light"
 -- config.color_scheme = "Brogrammer"
 -- config.color_scheme = "Brogrammer (Base 16)"
 -- config.color_scheme = "carbonfox"
--- config.color_scheme = 'Catch Me If You Can (terminal.sexy)'
+-- config.color_scheme = "Catch Me If You Can (terminal.sexy)"
 -- config.color_scheme = 'Catppuccin Frappe'
 -- config.color_scheme = 'Catppuccin Latte'
 -- config.color_scheme = 'Chalk (base16)'
@@ -106,33 +106,38 @@ config.enable_kitty_keyboard = true
 
 -- Each entry in launch_menu is an instance of a SpawnCommand object.
 
-config.launch_menu = {{
-    args = {'top'}
-}, {
-    label = 'System Processes',
-    args = {'htop'}
-}, {
-    label = 'Weather Forecast',
-    args = {'curl', '-s', 'v2.wttr.in/Chicago'}
-}, {
-    -- Optional label to show in the launcher. If omitted, a label
-    -- is derived from the `args`
-    label = 'Bash',
-    -- The argument array to spawn.  If omitted the default program
-    -- will be used as described in the documentation above
-    args = {'bash', '-l'}
+config.launch_menu = {
+	{
+		args = { "top" },
+	},
+	{
+		label = "System Processes",
+		args = { "htop" },
+	},
+	{
+		label = "Weather Forecast",
+		args = { "curl", "-s", "v2.wttr.in/Chicago" },
+	},
+	{
+		-- Optional label to show in the launcher. If omitted, a label
+		-- is derived from the `args`
+		label = "Bash",
+		-- The argument array to spawn.  If omitted the default program
+		-- will be used as described in the documentation above
+		args = { "bash", "-l" },
 
-    -- You can specify an alternative current working directory;
-    -- if you don't specify one then a default based on the OSC 7
-    -- escape sequence will be used (see the Shell Integration
-    -- docs), falling back to the home directory.
-    -- cwd = "/some/path"
+		-- You can specify an alternative current working directory;
+		-- if you don't specify one then a default based on the OSC 7
+		-- escape sequence will be used (see the Shell Integration
+		-- docs), falling back to the home directory.
+		-- cwd = "/some/path"
 
-    -- You can override environment variables just for this command
-    -- by setting this here.  It has the same semantics as the main
-    -- set_environment_variables configuration option described above
-    -- set_environment_variables = { FOO = "bar" },
-}}
+		-- You can override environment variables just for this command
+		-- by setting this here.  It has the same semantics as the main
+		-- set_environment_variables configuration option described above
+		-- set_environment_variables = { FOO = "bar" },
+	},
+}
 
 -- and finally, return the configuration to wezterm
 return config

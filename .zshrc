@@ -20,6 +20,7 @@ export MANPATH="/usr/local/man:$MANPATH"
 export ARCHFLAGS="-arch arm64"
 export DOTNET_ROOT="/opt/homebrew/opt/dotnet/libexec"
 export PATH="/Users/$USER/Library/Application Support/fnm:$PATH"
+export DOTLOC="/Users/$USER/dotfiles"
 
 #==============================================================================
 # GOOGLE CLOUD SDK
@@ -103,7 +104,8 @@ alias aria3d="aria2c -x 16 -s 16 -k 1M -j 16 --file-allocation=none \
               --max-overall-download-limit=0 --max-download-limit=0 \
               --http-accept-gzip=true --stream-piece-selector=inorder \
               --uri-selector=adaptive --check-certificate=false "
-alias nz="nvim ~/.zshrc"
+alias nz="nvim $DOTLOC/.zshrc"
+alias dup="./$DOTLOC/update.sh"
 alias wid="fd -e jpg -x wezterm imgcat --height=25%"
 alias wi="wezterm imgcat"
 alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"

@@ -1,5 +1,4 @@
-#!/bin/bash
-
+#!/usr/bin/env bash
 
 # Path to the .zshrc file in macOS
 ZSHRC_PATH="$HOME/.zshrc"
@@ -15,3 +14,4 @@ mkdir -p "$HOME/.config/wezterm"
 cp "./wezterm.lua" "$WEZTERM_PATH"
 
 echo "Dotfiles updated successfully!"
+
