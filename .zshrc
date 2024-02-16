@@ -1,6 +1,7 @@
 #==============================================================================
 # ZSHRC FOR MACOS, USING OH-MY-ZSH
-#==============================================================================#==============================================================================
+#==============================================================================
+#==============================================================================
 # GENERAL PATH CONFIGURATIONS
 #==============================================================================
 export PATH="/usr/bin:/bin:/usr/local/bin:/usr/sbin:/sbin:$PATH"
@@ -10,10 +11,10 @@ export PATH="/opt/homebrew/bin:$PATH"
 export PATH="/opt/homebrew/sbin:$PATH"
 export PATH="/Users/$USER/.mint/bin:$PATH"
 export PATH="/opt/homebrew/bin/ffmpeg:$PATH"
+export PATH="$HOME/.local/share/mise/shims:$PATH"
 export LLDB_EXEC="/opt/homebrew/opt/llvm/bin/lldb-vscode"
 export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
-export PYENV_ROOT="$HOME/.pyenv"
 export TESSDATA_PREFIX="/Users/$USER/Developer/docprocessing/tessdata_best/"
 export ZSH="$HOME/.oh-my-zsh"
 export MANPATH="/usr/local/man:$MANPATH"
@@ -28,30 +29,26 @@ export DOTLOC="/Users/$USER/dotfiles"
 source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
 source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
 #==============================================================================
-# PYTHON
-#==============================================================================
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-#==============================================================================
 # FZF
 #==============================================================================
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 #==============================================================================
 # Evals
 #==============================================================================
-eval "$(pyenv init -)"
-eval "`fnm env`"
+eval "$(mise activate zsh)"
 eval "$(thefuck --alias)"
 eval "$(brew shellenv)"
 eval "$(zoxide init zsh)"
 eval "$( wezterm shell-completion --shell zsh)"
+
 #==============================================================================
 # OH-MY-ZSH: OMZ
 #==============================================================================
 ZSH_THEME="random" # set by `omz`
 
 plugins=(git git-lfs brew xcode man gcloud dotenv azure aws cp macos 
-    gh github history npm fnm oc swiftpm rust 1password brew fd 
-    fzf thefuck pyenv python macos emoji emoji-clock aliases alias-finder
+    gh github history npm oc swiftpm rust 1password brew fd 
+    fzf thefuck python macos emoji emoji-clock aliases alias-finder
     wd pip python sudo fig pre-commit vscode web-search gitignore docker
     docker-compose urltools httpie zoxide
     )
@@ -89,7 +86,12 @@ alias llt='eza -lT --git-ignore --level=2 --group-directories-first'
 alias lT='eza -T --git-ignore --level=4 --group-directories-first'
 alias batp='bat --style plain'
 alias om='openai api models.list'
-alias oai='openai api chat.completions.create -m gpt-4-vision-preview -n 1 -M 512 -P 1.00 -t 0.7 --stop "" --stream -g user '
+alias oai='curl https://api.openai.com/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $OPENAI_API_KEY" \
+  -d ' 
+alias oaicli='openai api chat.completions.create -m gpt-4-vision-preview \
+  -n 1 -M 512 -P 1.00 -t 0.7 --stop "" --stream -g user '
 alias ytdl='yt-dlp'
 alias ytdlm='yt-dlp --extract-audio --audio-format mp3'
 alias weather='curl -s v2.wttr.in/Chicago'
@@ -105,6 +107,7 @@ alias aria3d="aria2c -x 16 -s 16 -k 1M -j 16 --file-allocation=none \
               --http-accept-gzip=true --stream-piece-selector=inorder \
               --uri-selector=adaptive --check-certificate=false "
 alias nz="nvim $DOTLOC/.zshrc"
+alias nmise="nvim /Users/$USER/.config/mise/config.toml"
 alias dup="./$DOTLOC/update.sh"
 alias wid="fd -e jpg -x wezterm imgcat --height=25%"
 alias wi="wezterm imgcat"
@@ -117,7 +120,8 @@ alias brewinstaller="brew install aria2 bat brotli ca-certificates cmake \
   ripgrep ripgrep-all swiftformat swiftlint tesseract tesseract-lang \
   thefuck tree tree-sitter trunk virtualenv webp wget yt-dlp zlib zoxide zstd"
 alias brewcaskinstaller="brew install --cask google-cloud-sdk wezterm"
-alias pipup="python -m venv .venv && source .venv/bin/activate && python -m pip install -U pip && python -m pip install -U -r requirements.txt"
+alias pipup="python -m venv .venv && source .venv/bin/activate && python -m \
+  pip install -U pip && python -m pip install -U -r requirements.txt"
 alias wg='wget --recursive --level=1 --span-hosts --tries=1 --no-directories \
  --timestamping --no-parent --execute robots=off --directory-prefix=files \
  --aceept=.pdf,.html,.rtf,.txt,.ppt,.pptx.,xls,.xlsx,.xml,.json,.doc,.docx \
@@ -130,8 +134,10 @@ alias runai="source /Users/$USER/Developer/Interpreter.venv/bin/activate \
   && python -m pip install -U -r requirements.txt \
   && interpreter --local --auto_run"
 alias spiderdl="spider --domain $ download"
-alias installrust="curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh"
-alias installomz="sh -c \"$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)\""
+alias installrust="curl --proto '=https' --tlsv1.2 \
+  -sSf https://sh.rustup.rs | sh"
+alias installomz="sh -c \"$(curl -fsSL \
+  https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)\""
 
 #==============================================================================
 # Custom
@@ -175,29 +181,16 @@ bindkey "\e[1;C" forward-word # ⇧→
 
 echo "Welcome, $USER! \n \
 You are using ZSH version $ZSH_VERSION on $OSTYPE. \n \
-* Common aliases: \n \
 - rg, rga, rgz, rg-fzf, fd, du, time, cloc, ps, btm, eza, yt-dlp, \n \
 - oai, om, weather, ig, rip, aria3d, mkat, icat, nz, omz \n \
-* Search web with: \
 - google, bing, archive, scholar, deepl, \n \
 - youtube, github, goodreads, ddg or duckduckgo \n \
 - wiki, news, map, image, ducky \n \
-* Update aliases: \n \
 - bubu for brew and wezterm cask\n \
-* Wezterm: \n \
 - ctrl+shift+enter for fullscreen \n \
 - ctrl+shift+e for split pane \n \
 - ctrl+shift+w for close pane \n \
 - ctrl+shift+tab for next pane \n \
-- nvim ~/.wezterm.lua for config \n \
-* Navigation with zoxide as cd replacement: \n \
-- z foo will cd to highest ranked dir matching foo \n \
-- zi for fzf interactive version \n \
-- z foo bar will cd to highest ranked dir matching foo and bar \n \
-- z foo / will cd to subdir starting with foo \n \
-- z .. goes one level up \n \
-- z - goes back to last dir \n \
-- z foo<space><tab> will show interactive completions \n \
 Most importantly, use **als** to find all aliases! \n \
-It's $(date +"%A, %B %d %Y %r")\n \
-The weather is \n$(curl -s 'v2.wttr.in/New_York?Fuq')\n" 
+It's $(date +"%A, %B %d %Y %r")\n "
+# The weather is \n$(curl -s 'v2.wttr.in/New_York?Fuq')\n" 
