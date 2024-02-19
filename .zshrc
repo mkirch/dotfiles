@@ -40,7 +40,7 @@ eval "$(thefuck --alias)"
 eval "$(brew shellenv)"
 eval "$(zoxide init zsh)"
 eval "$( wezterm shell-completion --shell zsh)"
-
+eval "$(op completion zsh)"; compdef _op op
 #==============================================================================
 # OH-MY-ZSH: OMZ
 #==============================================================================
