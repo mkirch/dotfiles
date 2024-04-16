@@ -112,7 +112,7 @@ config.launch_menu = {
 	},
 	{
 		label = "System Processes",
-		args = { "htop" },
+		args = { "zsh && htop" },
 	},
 	{
 		label = "Weather Forecast",

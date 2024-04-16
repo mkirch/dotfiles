@@ -11,6 +11,7 @@ export PATH="/opt/homebrew/bin:$PATH"
 export PATH="/opt/homebrew/sbin:$PATH"
 export PATH="/Users/$USER/.mint/bin:$PATH"
 export PATH="/opt/homebrew/bin/ffmpeg:$PATH"
+export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
 export PATH="$HOME/.local/share/mise/shims:$PATH"
 export LLDB_EXEC="/opt/homebrew/opt/llvm/bin/lldb-vscode"
 export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
@@ -45,6 +46,7 @@ eval "$(op completion zsh)"; compdef _op op
 # OH-MY-ZSH: OMZ
 #==============================================================================
 ZSH_THEME="random" # set by `omz`
+ZSH_THEME_RANDOM_QUIET=true
 
 plugins=(git git-lfs brew xcode man gcloud dotenv azure aws cp macos 
     gh github history npm oc swiftpm rust 1password brew fd 
@@ -123,8 +125,8 @@ alias brewcaskinstaller="brew install --cask google-cloud-sdk wezterm"
 alias pipup="python -m venv .venv && source .venv/bin/activate && python -m \
   pip install -U pip && python -m pip install -U -r requirements.txt"
 alias wg='wget --recursive --level=1 --span-hosts --tries=1 --no-directories \
- --timestamping --no-parent --execute robots=off --directory-prefix=files \
- --aceept=.pdf,.html,.rtf,.txt,.ppt,.pptx.,xls,.xlsx,.xml,.json,.doc,.docx \
+  --no-parent --execute robots=off --directory-prefix=files \
+ --accept=.pdf,.html,.rtf,.txt,.ppt,.pptx.,xls,.xlsx,.xml,.json,.doc,.docx \
  --user-agent="Mozilla/5.0 (Windows NT 6.1; rv:5.0 Gecko/20100101 Firefox/5.0"\
   --adjust-extension --no-clobber --wait=1 --random-wait --limit-rate=200k \
   --show-progress'
@@ -163,6 +165,10 @@ rga-fzf() {
 	echo "opening $file" &&
 	xdg-open "$file"
 }
+
+whisper() {
+    /Users/$USER/dotfiles/scripts/whisper_transcription.sh "$@"
+}
 #==============================================================================
 # Binds and Such
 #==============================================================================
@@ -179,18 +185,7 @@ bindkey "\e[1;C" forward-word # ⇧→
 # ZSH PROMPT 
 #==============================================================================
 
-echo "Welcome, $USER! \n \
-You are using ZSH version $ZSH_VERSION on $OSTYPE. \n \
-- rg, rga, rgz, rg-fzf, fd, du, time, cloc, ps, btm, eza, yt-dlp, \n \
-- oai, om, weather, ig, rip, aria3d, mkat, icat, nz, omz \n \
-- google, bing, archive, scholar, deepl, \n \
-- youtube, github, goodreads, ddg or duckduckgo \n \
-- wiki, news, map, image, ducky \n \
-- bubu for brew and wezterm cask\n \
-- ctrl+shift+enter for fullscreen \n \
-- ctrl+shift+e for split pane \n \
-- ctrl+shift+w for close pane \n \
-- ctrl+shift+tab for next pane \n \
-Most importantly, use **als** to find all aliases! \n \
-It's $(date +"%A, %B %d %Y %r")\n "
-# The weather is \n$(curl -s 'v2.wttr.in/New_York?Fuq')\n" 
+echo "zsh: $ZSH_VERSION os: $OSTYPE $(date +"%A, %B %d %Y %r") \n \
+rg, rga, rgz, rg-fzf, fd, du, time, cloc, ps, btm, eza, yt-dlp, oai, om, ig \n \
+weather, rip, aria3d, mkat, icat, nz, omz, google, bing, archive, scholar \n \
+deepl, youtube, github, goodreads, ddg, wiki, news, map, image, ducky"
