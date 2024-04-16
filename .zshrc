@@ -52,7 +52,7 @@ plugins=(git git-lfs brew xcode man gcloud dotenv azure aws cp macos
     gh github history npm oc swiftpm rust 1password brew fd 
     fzf thefuck python macos emoji emoji-clock aliases alias-finder
     wd pip python sudo fig pre-commit vscode web-search gitignore docker
-    docker-compose urltools httpie zoxide
+    docker-compose urltools httpie zoxide terraform helm kubectl
     )
 source $ZSH/oh-my-zsh.sh
 source /Users/$USER/.config/op/plugins.sh
@@ -80,12 +80,12 @@ alias htop='btm --enable_gpu_memory -g -a --mem_as_value --color gruvbox \
   -r 250 --network_use_bytes --network_use_log --enable_cache_memory \
   --hide_table_gap --default_time_value 30000 --process_command \
   -c --show_table_scroll_position -n --basic'
-alias l='eza -G --icons --group-directories-first'
-alias lg='eza -l --icons --git-ignore --group-directories-first --git'
-alias ll='eza -l --all --all --group-directories-first --git'
-alias lt='eza -T --git-ignore --level=2 --group-directories-first'
-alias llt='eza -lT --git-ignore --level=2 --group-directories-first'
-alias lT='eza -T --git-ignore --level=4 --group-directories-first'
+alias l='eza -Gah --icons --group-directories-first'
+alias lg='eza -lah --icons --git-ignore --group-directories-first --git'
+alias ll='eza -lah --all --all --group-directories-first --git'
+alias lt='eza -Tah --git-ignore --level=2 --group-directories-first'
+alias llt='eza -laT --git-ignore --level=2 --group-directories-first'
+alias lT='eza -Tah --git-ignore --level=4 --group-directories-first'
 alias batp='bat --style plain'
 alias om='openai api models.list'
 alias oai='curl https://api.openai.com/v1/chat/completions \
@@ -188,4 +188,5 @@ bindkey "\e[1;C" forward-word # ⇧→
 echo "zsh: $ZSH_VERSION os: $OSTYPE $(date +"%A, %B %d %Y %r") \n \
 rg, rga, rgz, rg-fzf, fd, du, time, cloc, ps, btm, eza, yt-dlp, oai, om, ig \n \
 weather, rip, aria3d, mkat, icat, nz, omz, google, bing, archive, scholar \n \
-deepl, youtube, github, goodreads, ddg, wiki, news, map, image, ducky"
+terraform, helm, kubectl, docker, zoxide, z, wezterm, op, mise, deepl, \n \
+youtube, github, goodreads, ddg, wiki, news, map, image, ducky"
