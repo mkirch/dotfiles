@@ -12,7 +12,6 @@ export PATH="/opt/homebrew/sbin:$PATH"
 export PATH="/Users/$USER/.mint/bin:$PATH"
 export PATH="/opt/homebrew/bin/ffmpeg:$PATH"
 export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
-export PATH="$HOME/.local/share/mise/shims:$PATH"
 export LLDB_EXEC="/opt/homebrew/opt/llvm/bin/lldb-vscode"
 export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
@@ -36,7 +35,6 @@ source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
 #==============================================================================
 # Evals
 #==============================================================================
-eval "$(mise activate zsh)"
 eval "$(thefuck --alias)"
 eval "$(brew shellenv)"
 eval "$(zoxide init zsh)"
@@ -47,13 +45,56 @@ eval "$(op completion zsh)"; compdef _op op
 #==============================================================================
 ZSH_THEME="random" # set by `omz`
 ZSH_THEME_RANDOM_QUIET=true
+VSCODE=code-insiders
 
-plugins=(git git-lfs brew xcode man gcloud dotenv azure aws cp macos 
-    gh github history npm oc swiftpm rust 1password brew fd
-    fzf thefuck python macos emoji emoji-clock aliases alias-finder
-    wd pip python sudo fig pre-commit vscode web-search gitignore docker
-    docker-compose urltools httpie zoxide terraform helm kubectl
-    )
+plugins=( 
+  1password 
+  alias-finder
+  aliases 
+  azure
+  brew 
+  cp 
+  docker
+  docker-compose 
+  dotenv
+  emoji
+  emoji-clock
+  extract
+  eza 
+  fd
+  fig
+  fzf 
+  gcloud
+  gh
+  git 
+  git-lfs
+  github
+  gitignore 
+  helm 
+  history
+  httpie 
+  kubectl
+  kubectx
+  macos
+  man
+  npm
+  oc
+  pip
+  pre-commit
+  python 
+  rust
+  sudo
+  swiftpm
+  terraform 
+  thefuck 
+  urltools
+  vscode 
+  wd 
+  web-search
+  xcode
+  zsh-interactive-cd
+  zoxide
+)
 source $ZSH/oh-my-zsh.sh
 source /Users/$USER/.config/op/plugins.sh
 #==============================================================================
@@ -109,7 +150,6 @@ alias aria3d="aria2c -x 16 -s 16 -k 1M -j 16 --file-allocation=none \
               --http-accept-gzip=true --stream-piece-selector=inorder \
               --uri-selector=adaptive --check-certificate=false "
 alias nz="nvim $DOTLOC/.zshrc"
-alias nmise="nvim /Users/$USER/.config/mise/config.toml"
 alias dup="./$DOTLOC/update.sh"
 alias wid="fd -e jpg -x wezterm imgcat --height=25%"
 alias wi="wezterm imgcat"
@@ -180,13 +220,3 @@ bindkey "\e[1;9C" end-of-line # ⌥→
 bindkey "\e[1;D" backward-word # ⇧←
 bindkey "\e[1;C" forward-word # ⇧→
 
-
-#==============================================================================
-# ZSH PROMPT 
-#==============================================================================
-
-echo "zsh: $ZSH_VERSION os: $OSTYPE $(date +"%A, %B %d %Y %r") \n \
-rg, rga, rgz, rg-fzf, fd, du, time, cloc, ps, btm, eza, yt-dlp, oai, om, ig \n \
-weather, rip, aria3d, mkat, icat, nz, omz, google, bing, archive, scholar \n \
-terraform, helm, kubectl, docker, zoxide, z, wezterm, op, mise, deepl, \n \
-youtube, github, goodreads, ddg, wiki, news, map, image, ducky"
