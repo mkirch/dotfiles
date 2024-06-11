@@ -1,17 +1,13 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-# Path to the .zshrc file in macOS
-ZSHRC_PATH="$HOME/.zshrc"
-
-# Path to the wezterm.lua file in macOS
-WEZTERM_PATH="$HOME/.config/wezterm/wezterm.lua"
-
-# Update .zshrc
-cp "./.zshrc" "$ZSHRC_PATH"
-
-# Update wezterm.lua
-mkdir -p "$HOME/.config/wezterm"
-cp "./wezterm.lua" "$WEZTERM_PATH"
-
+echo "Running dotfiles update script"
+echo "Dotfiles directory: ${DOTLOC}"
+echo "Home directory: ${HOME}"
+echo "Current directory: $(pwd || true)"
+echo "Copying dotfiles..."
+echo "Updating .zshrc..."
+cp "${DOTLOC}/.zshrc" "${HOME}/.zshrc"
+echo "Updating wezterm configuration..."
+mkdir -p "${HOME}/.config/wezterm"
+cp "${DOTLOC}/wezterm.lua" "${HOME}/.config/wezterm/wezterm.lua"
 echo "Dotfiles updated successfully!"
-

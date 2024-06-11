@@ -23,11 +23,19 @@ export DOTNET_ROOT="/opt/homebrew/opt/dotnet/libexec"
 export PATH="/Users/$USER/Library/Application Support/fnm:$PATH"
 export DOTLOC="/Users/$USER/dotfiles"
 export FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+export PNPM_HOME="/Users/$USER/Library/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+export PATH="$PATH:./node_modules/.bin"
 #==============================================================================
-# GOOGLE CLOUD SDK
+# Completions
 #==============================================================================
 source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
 source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
+source <(cilium completion zsh)
+[[ $commands[kubectl] ]] && source <(kubectl completion zsh)
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/zsh_completion" ] && \. "$NVM_DIR/zsh_completion"  # This loads nvm bash_completion
 #==============================================================================
 # FZF
 #==============================================================================
@@ -38,58 +46,58 @@ source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
 eval "$(thefuck --alias)"
 eval "$(brew shellenv)"
 eval "$(zoxide init zsh)"
-eval "$( wezterm shell-completion --shell zsh)"
-eval "$(op completion zsh)"; compdef _op op
+eval "$(wezterm shell-completion --shell zsh)"
+eval "$(pnpm completion zsh)"
 #==============================================================================
 # OH-MY-ZSH: OMZ
 #==============================================================================
-ZSH_THEME="random" # set by `omz`
+ZSH_THEME="random"
 ZSH_THEME_RANDOM_QUIET=true
 VSCODE=code-insiders
 
 plugins=( 
-  1password 
+  1password
   alias-finder
-  aliases 
+  aliases
   azure
-  brew 
-  cp 
+  brew
+  cp
   docker
-  docker-compose 
+  docker-compose
   dotenv
   emoji
   emoji-clock
   extract
-  eza 
+  eza
   fd
   fig
-  fzf 
+  fzf
   gcloud
   gh
-  git 
+  git
   git-lfs
   github
   gitignore 
-  helm 
+  helm
   history
-  httpie 
+  httpie
   kubectl
   kubectx
   macos
   man
   npm
-  oc
+  nvm
   pip
   pre-commit
-  python 
+  python
   rust
+  stripe
   sudo
   swiftpm
-  terraform 
-  thefuck 
+  thefuck
   urltools
-  vscode 
-  wd 
+  vscode
+  wd
   web-search
   xcode
   zsh-interactive-cd
@@ -121,12 +129,14 @@ alias htop='btm --enable_gpu_memory -g -a --mem_as_value --color gruvbox \
   -r 250 --network_use_bytes --network_use_log --enable_cache_memory \
   --hide_table_gap --default_time_value 30000 --process_command \
   -c --show_table_scroll_position -n --basic'
-alias l='eza -Tah --icons --group-directories-first --git-ignore --level=2'
-alias lg='eza -lah --icons --git-ignore --group-directories-first'
-alias ll='eza -lTah --icons --git-ignore --level=2 --group-directories-first'
-alias lt='eza -Tah --icons --git-ignore --level=2 --group-directories-first'
-alias llt='eza -laT --icons --git-ignore --level=2 --group-directories-first'
-alias lT='eza -Tah --icons --git-ignore --level=4 --group-directories-first'
+alias l='eza -lH --hyperlink --no-quotes -w=80 \
+  --total-size --no-user --no-permissions --no-time --no-git \
+  --icons --group-directories-first --git-ignore'
+alias ll='eza -lAHh --icons --git-ignore --total-size --time-style=relative --git --git-repos --group-directories-first'
+alias ll='eza -laHh --icons --git-ignore --total-size --git --git-repos --group-directories-first'
+alias lt='eza -Tah --icons --git-ignore --group-directories-first'
+alias llt='eza -laT --icons --git-ignore --group-directories-first'
+alias lT='eza -Tah --icons --git-ignore --group-directories-first'
 alias batp='bat --style plain'
 alias om='openai api models.list'
 alias oai='curl https://api.openai.com/v1/chat/completions \
@@ -150,14 +160,17 @@ alias aria3d="aria2c -x 16 -s 16 -k 1M -j 16 --file-allocation=none \
               --http-accept-gzip=true --stream-piece-selector=inorder \
               --uri-selector=adaptive --check-certificate=false "
 alias nz="nvim $DOTLOC/.zshrc"
-alias dup="./$DOTLOC/update.sh"
+alias dupdate="$DOTLOC/update.sh"
+alias domz="dupdate && omz reload"
+alias dup="dupdate && omz reload"
+alias zup="dupdate && omz reload"
 alias wid="fd -e jpg -x wezterm imgcat --height=25%"
 alias wi="wezterm imgcat"
 alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 alias brewinstaller="brew install aria2 bat brotli ca-certificates cmake \
   coreutils dlib dotnet exiftool eza ffmpeg flac fnm fontconfig freetype \
   gallery-dl gcc gettext gh git git-lfs go jq lame libmagic llvm \
-  luajit mint mpv msgpack mupdf ncurses neovim openblas openjdk \
+  luajit mint msgpack mupdf ncurses neovim openblas openjdk \
   openjpeg openssl pandoc poppler pre-commit protobuf pyenv ranger \
   ripgrep ripgrep-all swiftformat swiftlint tesseract tesseract-lang \
   thefuck tree tree-sitter trunk virtualenv webp wget yt-dlp zlib zoxide zstd"
@@ -180,6 +193,27 @@ alias installrust="curl --proto '=https' --tlsv1.2 \
   -sSf https://sh.rustup.rs | sh"
 alias installomz="sh -c \"$(curl -fsSL \
   https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)\""
+alias pn="pnpm"
+alias code="code-insiders"
+alias k="kubectl"
+alias akcred="az aks get-credentials --resource-group $AKS_RESOURCE_GROUP --name $AKS_CLUSTER_NAME"
+alias akgup="az aks get-upgrades --resource-group $AKS_RESOURCE_GROUP --name $AKS_CLUSTER_NAME"
+alias akupgrade="az aks upgrade --resource-group $AKS_RESOURCE_GROUP --name $AKS_CLUSTER_NAME --kubernetes-version $AKS_KUBERNETES_VERSION"
+alias aknls="az aks nodepool list --resource-group $AKS_RESOURCE_GROUP --cluster-name $AKS_CLUSTER_NAME"
+alias aknshow="az aks nodepool show --resource-group $AKS_RESOURCE_GROUP --cluster-name $AKS_CLUSTER_NAME"
+alias akdash="az aks browse --resource-group $AKS_RESOURCE_GROUP -n $AKS_CLUSTER_NAME"
+alias akstart="az aks start --resource-group $AKS_RESOURCE_GROUP -n $AKS_CLUSTER_NAME"
+alias akstop="az aks stop -g $AKS_RESOURCE_GROUP -n $AKS_CLUSTER_NAME"
+alias akls="az aks list -g $AKS_RESOURCE_GROUP"
+alias akshow="az aks show -g $AKS_RESOURCE_GROUP -n $AKS_CLUSTER_NAME"
+alias akgv="az aks get-versions"
+alias ak="az aks"
+#==============================================================================
+# DOTENV
+#==============================================================================
+if [ -f "$DOTLOC/.env" ]; then
+  source "$DOTLOC/.env"
+fi
 
 #==============================================================================
 # Custom
@@ -219,4 +253,3 @@ bindkey "\e[1;9D" beginning-of-line # ⌥←
 bindkey "\e[1;9C" end-of-line # ⌥→
 bindkey "\e[1;D" backward-word # ⇧←
 bindkey "\e[1;C" forward-word # ⇧→
-
