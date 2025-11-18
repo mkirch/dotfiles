@@ -1,0 +1,12 @@
+#------------------------------------------------------------------------------
+# Private Aliases - Copy this file to .zsh_aliases and add your personal aliases
+# This file is gitignored and will not be committed to the repository
+#------------------------------------------------------------------------------
+
+# Example private aliases:
+# alias myproject='cd ~/projects/my-secret-project'
+# alias deploy='./scripts/deploy.sh'
+# alias vpn='openvpn --config ~/.vpn/config.ovpn'
+
+# Add your personal aliases below:
+

@@ -114,6 +114,16 @@ ipython_config.py
 # PEP 582; used by e.g. github.com/David-OConnor/pyflow and github.com/pdm-project/pdm
 __pypackages__/
 
+tt.*
+.tests
+doc/tags
+debug
+.repro
+foo.*
+*.log
+data
+.zsh_aliases
+FontPatcher/
 # Celery stuff
 celerybeat-schedule
 celerybeat.pid
@@ -312,6 +322,7 @@ web_modules/
 
 # dotenv environment variable files
 .env
+.dotfiles.env
 .env.development.local
 .env.test.local
 .env.production.local
@@ -671,3 +682,10 @@ tags
 # Persistent undo
 [._]*.un~
 .vscode/settings.json
+
+# Cursor
+cursor
+
+# Private dotfiles (not committed)
+.zsh_aliases
+zsh/.zsh_aliases

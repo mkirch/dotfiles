@@ -1,0 +1,71 @@
+#------------------------------------------------------------------------------
+# Configuration file for Ghostty
+# MacOS: `~/Library/Application Support/com.mitchellh.ghostty/config.toml` 
+#------------------------------------------------------------------------------
+
+# Theme configuratios
+theme = Github Dark High Contrast
+
+# Font configuration
+font-size = 11
+font-family = FiraCode Nerd Font Mono
+
+# Window settings
+window-height = 90	
+window-width = 160
+
+# Performance settings
+unfocused-split-opacity = 0.9
+
+# Cursor settings
+cursor-style = block
+cursor-style-blink = true
+
+# Shell integration
+shell-integration = detect
+shell-integration-features = cursor,sudo,title
+
+# macOS specific settings
+macos-option-as-alt = true
+macos-titlebar-style = native
+
+# Clipboard
+clipboard-read = allow
+clipboard-write = allow
+clipboard-paste-protection = true
+
+# Mouse settings
+mouse-hide-while-typing = true
+
+# Scrollback
+scrollback-limit = 10000
+
+# Quick Terminal (macOS)
+# Use Cmd+` to toggle quick terminal
+# Requires accessibility permissions in System Settings
+
+# Security settings
+confirm-close-surface = true
+copy-on-select = true
+
+# Advanced settings
+gtk-single-instance = true
+auto-update = download
+auto-update-channel = stable
+
+# URL handling
+link-url = true
+
+# Font features
+# Note: font-variation settings require specific font support
+# Uncomment and adjust if using a variable font
+# font-variation = wght=400
+# font-variation-bold = wght=700
+# font-variation-italic = ital=1
+# font-variation-bold-italic = wght=700 ital=1
+
+# Additional keybindings
+keybind = cmd+k=clear_screen
+keybind = cmd+d=new_split:right
+keybind = cmd+shift+d=new_split:down
+keybind = cmd+shift+enter=toggle_fullscreen
