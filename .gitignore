@@ -686,6 +686,20 @@ tags
 # Cursor
 cursor
 
+# Backups (contain machine-specific paths)
+backup/
+
+# Font build artifacts
+fonts/
+
 # Private dotfiles (not committed)
 .zsh_aliases
 zsh/.zsh_aliases
+Brewfile.local
+
+# Navi community/downloaded cheatsheets (cloned repos)
+navi/cheats/community/
+navi/cheats/tldr/
+navi/cheats/tmp/
+
+.dotfiles.env

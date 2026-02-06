@@ -1,12 +1,24 @@
 #------------------------------------------------------------------------------
-# Private Aliases - Copy this file to .zsh_aliases and add your personal aliases
-# This file is gitignored and will not be committed to the repository
+# Private aliases — gitignored, never committed
+# Copy to zsh/.zsh_aliases and fill in your values
 #------------------------------------------------------------------------------
 
-# Example private aliases:
-# alias myproject='cd ~/projects/my-secret-project'
-# alias deploy='./scripts/deploy.sh'
-# alias vpn='openvpn --config ~/.vpn/config.ovpn'
+# AWS (account-specific)
+# alias awslogin="aws configure sso"
+# alias awsd="aws --profile <your-profile>"
 
-# Add your personal aliases below:
+# OSINT / forensics tools
+# alias sherlock='uvx --from sherlock-project sherlock'
+# alias autopsy="$HOME/autopsy/<version>/bin/autopsy"
 
+# Auto-enable debug mode in project directories
+# claude() {
+#   if [[ "$PWD" == "$DEV_HOME/myproject"* ]]; then
+#     command claude --debug "$@"
+#   else
+#     command claude "$@"
+#   fi
+# }
+
+# Location-specific overrides
+# alias weather='curl -s v2.wttr.in/<your-city>'

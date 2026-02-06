@@ -65,7 +65,9 @@ link-url = true
 # font-variation-bold-italic = wght=700 ital=1
 
 # Additional keybindings
+keybind = cmd+/=text:\x0e
 keybind = cmd+k=clear_screen
 keybind = cmd+d=new_split:right
 keybind = cmd+shift+d=new_split:down
-keybind = cmd+shift+enter=toggle_fullscreen
+keybind = cmd+ctrl+f=toggle_fullscreen
+keybind = shift+enter=text:\x1b\r

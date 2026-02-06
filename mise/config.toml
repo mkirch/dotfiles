@@ -1,0 +1,60 @@
+[settings]
+auto_install = false
+experimental = true
+lockfile = true  # Enable checksum verification via mise.lock
+
+[tools]
+# Runtimes
+node = "lts"
+pnpm = "latest"
+gh = "latest"
+terraform = "latest"
+"aqua:superfly/flyctl" = "latest"
+
+# Python toolchain (uv handles python installs)
+"aqua:astral-sh/uv" = "latest"
+
+# Modern CLI tools (replace brew versions)
+"aqua:sharkdp/fd" = "latest"
+"aqua:sharkdp/bat" = "latest"
+"aqua:junegunn/fzf" = "latest"
+"aqua:BurntSushi/ripgrep" = "latest"
+"aqua:phiresky/ripgrep-all" = "latest"
+"aqua:jqlang/jq" = "latest"
+"aqua:mikefarah/yq" = "latest"
+"aqua:ClementTsang/bottom" = "latest"
+"aqua:bootandy/dust" = "latest"
+"aqua:ajeetdsouza/zoxide" = "latest"
+"aqua:dandavison/delta" = "latest"
+"aqua:jesseduffield/lazygit" = "latest"
+"aqua:watchexec/watchexec" = "latest"
+"aqua:rs/curlie" = "latest"
+"aqua:charmbracelet/glow" = "latest"
+"cargo:eza" = "latest"
+"cargo:tokei" = "latest"
+"cargo:tealdeer" = "latest"  # tldr client for navi --tldr
+# GitHub releases (with lockfile checksums) - for tools not in aqua
+"github:dalance/procs" = "latest"
+"aqua:sxyazi/yazi" = "latest"
+
+# Cargo tools (migrated from brew bundle)
+"cargo:cargo-generate" = "latest"
+"cargo:cargo-progenitor" = "latest"
+"cargo:cargo-swift" = "latest"
+"cargo:cargo-update" = "latest"
+"cargo:dutree" = "latest"
+"cargo:evcxr_jupyter" = "latest"
+"cargo:hackernews_tui" = "latest"
+"aqua:sharkdp/hyperfine" = "latest"
+"cargo:imessage-exporter" = "latest"
+"cargo:names" = "latest"
+"aqua:chmln/sd" = "latest"
+"cargo:spider_cli" = "latest"
+"cargo:spider_worker" = "latest"
+"cargo:wasm-pack" = "latest"
+"cargo:worker-build" = "latest"
+"github:r-lib/rig" = "latest"
+
+[tool_alias.node.versions]
+lts = "22"
+current = "23"

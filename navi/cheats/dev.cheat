@@ -1,0 +1,342 @@
+% uv, python, pip
+
+# Run python script in project
+uv run python <script>
+
+# Run python interactively
+uv run python
+
+# Add dependency
+uv add <package>
+
+# Add dev dependency
+uv add --dev <package>
+
+# Remove dependency
+uv remove <package>
+
+# Sync dependencies
+uv sync
+
+# Create new project
+uv init <name>
+
+# Run tool without installing
+uvx <tool>
+
+# Run specific version of tool
+uvx --python <version> <tool>
+
+$ version: echo -e "3.10\n3.11\n3.12\n3.13"
+
+# Install tool globally
+uv tool install <tool>
+
+# List installed tools
+uv tool list
+
+# Create venv
+uv venv
+
+# Pip install (explicit)
+uv pip install <package>
+
+# Pip compile requirements
+uv pip compile requirements.in -o requirements.txt
+
+% ruff, lint
+
+# Check code
+ruff check .
+
+# Check and fix
+ruff check --fix .
+
+# Format code
+ruff format .
+
+# Format check only
+ruff format --check .
+
+% mypy, typecheck
+
+# Type check
+mypy <path>
+
+# Type check with strict mode
+mypy --strict <path>
+
+# Type check ignoring missing imports
+mypy --ignore-missing-imports <path>
+
+% pytest, test
+
+# Run all tests
+pytest
+
+# Run with verbose output
+pytest -v
+
+# Run specific test file
+pytest <file>
+
+# Run specific test function
+pytest <file>::<test_name>
+
+# Run tests matching pattern
+pytest -k "<pattern>"
+
+# Run with coverage
+pytest --cov=<package>
+
+# Run last failed tests
+pytest --lf
+
+# Run and stop on first failure
+pytest -x
+
+# Run with print output
+pytest -s
+
+% brew, homebrew
+
+# Install package
+brew install <package>
+
+# Install cask (GUI app)
+brew install --cask <cask>
+
+# Update brew
+brew update
+
+# Upgrade all packages
+brew upgrade
+
+# Upgrade specific package
+brew upgrade <package>
+
+# Search packages
+brew search <query>
+
+# Show package info
+brew info <package>
+
+# List installed packages
+brew list
+
+# List outdated packages
+brew outdated
+
+# Uninstall package
+brew uninstall <package>
+
+# Cleanup old versions
+brew cleanup
+
+# Show dependencies
+brew deps <package>
+
+# Show dependents (what depends on this)
+brew uses --installed <package>
+
+# Dump installed to Brewfile
+brew bundle dump --describe
+
+# Install from Brewfile
+brew bundle
+
+# Doctor (check for issues)
+brew doctor
+
+# Pin package (prevent upgrades)
+brew pin <package>
+
+# Unpin package
+brew unpin <package>
+
+% gh, github
+
+# Clone repo
+gh repo clone <owner>/<repo>
+
+# Create repo
+gh repo create <name>
+
+# View repo in browser
+gh repo view --web
+
+# List PRs
+gh pr list
+
+# Create PR
+gh pr create
+
+# Create PR with title
+gh pr create -t "<title>" -b "<body>"
+
+# View PR
+gh pr view <number>
+
+# Checkout PR
+gh pr checkout <number>
+
+# Merge PR
+gh pr merge <number>
+
+# List issues
+gh issue list
+
+# Create issue
+gh issue create
+
+# View issue
+gh issue view <number>
+
+# Close issue
+gh issue close <number>
+
+# List workflows
+gh workflow list
+
+# Run workflow
+gh workflow run <workflow>
+
+# View workflow runs
+gh run list
+
+# View run logs
+gh run view <run_id> --log
+
+# Create gist
+gh gist create <file>
+
+# List gists
+gh gist list
+
+# Auth status
+gh auth status
+
+% jq, json
+
+# Pretty print JSON
+jq '.' <file>
+
+# Get field
+jq '.<field>' <file>
+
+# Get nested field
+jq '.<field>.<nested>' <file>
+
+# Get array element
+jq '.[<index>]' <file>
+
+# Get all array elements' field
+jq '.[].<field>' <file>
+
+# Filter array
+jq '.[] | select(.<field> == "<value>")' <file>
+
+# Get keys
+jq 'keys' <file>
+
+# Get length
+jq 'length' <file>
+
+# Compact output
+jq -c '.' <file>
+
+# Raw output (no quotes)
+jq -r '.<field>' <file>
+
+# From string
+echo '<json>' | jq '.'
+
+% yq, yaml
+
+# Read YAML
+yq '.' <file>
+
+# Get field
+yq '.<field>' <file>
+
+# Set field
+yq '.<field> = "<value>"' <file>
+
+# Delete field
+yq 'del(.<field>)' <file>
+
+# Convert YAML to JSON
+yq -o=json '.' <file>
+
+# Convert JSON to YAML
+yq -P '.' <file.json>
+
+% aws, cloud
+
+# Configure SSO
+aws configure sso
+
+# SSO login
+aws sso login
+
+# List S3 buckets
+aws s3 ls
+
+# List S3 bucket contents
+aws s3 ls s3://<bucket>/
+
+# Copy to S3
+aws s3 cp <file> s3://<bucket>/<key>
+
+# Copy from S3
+aws s3 cp s3://<bucket>/<key> <file>
+
+# Sync to S3
+aws s3 sync <dir> s3://<bucket>/<prefix>
+
+# Sync from S3
+aws s3 sync s3://<bucket>/<prefix> <dir>
+
+# Get caller identity
+aws sts get-caller-identity
+
+# List EC2 instances
+aws ec2 describe-instances
+
+# List Lambda functions
+aws lambda list-functions
+
+% ssh
+
+# Connect to host
+ssh <user>@<host>
+
+# Connect with specific key
+ssh -i <keyfile> <user>@<host>
+
+# Connect on specific port
+ssh -p <port> <user>@<host>
+
+# Local port forward
+ssh -L <localport>:<remotehost>:<remoteport> <user>@<host>
+
+# Remote port forward
+ssh -R <remoteport>:<localhost>:<localport> <user>@<host>
+
+# SOCKS proxy
+ssh -D <port> <user>@<host>
+
+# Run command
+ssh <user>@<host> '<command>'
+
+# Copy SSH key to server
+ssh-copy-id <user>@<host>
+
+# Generate SSH key
+ssh-keygen -t ed25519 -C "<email>"
+
+# Add key to agent
+ssh-add <keyfile>
+
+# List keys in agent
+ssh-add -l

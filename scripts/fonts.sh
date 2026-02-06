@@ -120,33 +120,33 @@ EXTRA_PATCH_TARGETS=()
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
-    --install)
-      INSTALL_FONTS=true
-      shift
-      ;;
-    --patch)
-      PATCH_FONTS=true
-      shift
-      ;;
-    --font)
-      PATCH_FONTS=true
-      shift
-      if [[ $# -eq 0 ]]; then
-        echo "--font requires a path argument" >&2
-        exit 1
-      fi
-      EXTRA_PATCH_TARGETS+=("$1")
-      shift
-      ;;
-    -h|--help)
-      usage
-      exit 0
-      ;;
-    *)
-      echo "Unknown option: $1" >&2
-      usage
+  --install)
+    INSTALL_FONTS=true
+    shift
+    ;;
+  --patch)
+    PATCH_FONTS=true
+    shift
+    ;;
+  --font)
+    PATCH_FONTS=true
+    shift
+    if [[ $# -eq 0 ]]; then
+      echo "--font requires a path argument" >&2
       exit 1
-      ;;
+    fi
+    EXTRA_PATCH_TARGETS+=("$1")
+    shift
+    ;;
+  -h | --help)
+    usage
+    exit 0
+    ;;
+  *)
+    echo "Unknown option: $1" >&2
+    usage
+    exit 1
+    ;;
   esac
 done
 
@@ -183,3 +183,4 @@ if [[ "${PATCH_FONTS}" == "true" ]]; then
     fontforge --complete --script "${font_patcher}" "${font}"
   done
 fi
+

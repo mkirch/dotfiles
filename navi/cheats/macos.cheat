@@ -1,0 +1,214 @@
+% macos, system
+
+# Flush DNS cache
+sudo dscacheutil -flushcache && sudo killall -HUP mDNSResponder
+
+# Show hidden files in Finder
+defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder
+
+# Hide hidden files in Finder
+defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder
+
+# Show full path in Finder title
+defaults write com.apple.finder _FXShowPosixPathInTitle -bool true && killall Finder
+
+# Disable .DS_Store on network volumes
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+
+# Show all file extensions
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+
+# Screenshot to clipboard
+screencapture -c
+
+# Screenshot selection to clipboard
+screencapture -ic
+
+# Screenshot to file
+screencapture <filename>.png
+
+# Screenshot selection to file
+screencapture -i <filename>.png
+
+# Screenshot window to file
+screencapture -iW <filename>.png
+
+# List all apps
+mdfind "kMDItemKind == 'Application'"
+
+# Rebuild Spotlight index
+sudo mdutil -E /
+
+# Disable Spotlight indexing
+sudo mdutil -a -i off
+
+# Enable Spotlight indexing
+sudo mdutil -a -i on
+
+# Empty trash securely
+rm -rf ~/.Trash/*
+
+# Get macOS version
+sw_vers
+
+# System info
+system_profiler SPSoftwareDataType
+
+# Hardware info
+system_profiler SPHardwareDataType
+
+# List USB devices
+system_profiler SPUSBDataType
+
+# Open app
+open -a "<appname>"
+
+# Open in default app
+open <file>
+
+# Open URL
+open "<url>"
+
+# Open Finder at path
+open <path>
+
+# Reveal in Finder
+open -R <file>
+
+# Get bundle ID of app
+osascript -e 'id of app "<appname>"'
+
+# Lock screen
+pmset displaysleepnow
+
+# Prevent sleep
+caffeinate -d
+
+# Prevent sleep for duration
+caffeinate -t <seconds>
+
+# Eject disk
+diskutil eject <disk>
+
+# List disks
+diskutil list
+
+# Get disk info
+diskutil info <disk>
+
+# Check disk
+diskutil verifyDisk <disk>
+
+# Repair disk permissions
+diskutil repairPermissions /
+
+% clipboard, pbcopy, pbpaste
+
+# Copy to clipboard
+echo "<text>" | pbcopy
+
+# Copy file contents
+pbcopy < <file>
+
+# Paste clipboard
+pbpaste
+
+# Paste to file
+pbpaste > <file>
+
+# Copy pwd
+pwd | pbcopy
+
+# Copy file path
+echo "$(pwd)/<file>" | pbcopy
+
+% launchctl, services
+
+# List all services
+launchctl list
+
+# Start service
+launchctl start <service>
+
+# Stop service
+launchctl stop <service>
+
+# Load launch agent
+launchctl load ~/Library/LaunchAgents/<plist>
+
+# Unload launch agent
+launchctl unload ~/Library/LaunchAgents/<plist>
+
+# Restart service
+launchctl stop <service> && launchctl start <service>
+
+% network, wifi
+
+# Get IP address
+ipconfig getifaddr en0
+
+# Get external IP
+curl -s ifconfig.me
+
+# Show wifi info
+/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I
+
+# Scan for wifi networks
+/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -s
+
+# Show routing table
+netstat -nr
+
+# Show listening ports
+lsof -i -P | grep LISTEN
+
+# Check port
+lsof -i :<port>
+
+# Kill process on port
+lsof -ti :<port> | xargs kill -9
+
+# DNS lookup
+dig <domain>
+
+# DNS lookup short
+dig +short <domain>
+
+# Reverse DNS
+dig -x <ip>
+
+# Trace route
+traceroute <host>
+
+# Ping
+ping -c <count> <host>
+
+# Flush ARP cache
+sudo arp -d -a
+
+% quicklook, preview
+
+# Quick Look file
+qlmanage -p <file>
+
+# Generate thumbnail
+qlmanage -t -s 512 -o . <file>
+
+% say, speech
+
+# Text to speech
+say "<text>"
+
+# Text to speech from file
+say -f <file>
+
+# Save speech to audio file
+say -o <output>.aiff "<text>"
+
+# List voices
+say -v '?'
+
+# Use specific voice
+say -v <voice> "<text>"
+
+$ voice: echo -e "Alex\nSamantha\nVictoria\nDaniel"

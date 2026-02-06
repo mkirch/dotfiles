@@ -31,17 +31,16 @@ git clone https://github.com/mkirch/dotfiles.git
 cd dotfiles
 
 # Optionally create a .env file in the repo with your personal settings
-# (it will be copied to ~/.dotfiles.env by update.sh)
 cp .env.example .env
 $EDITOR .env
 
-# Sync the configs into place (copies .env → ~/.dotfiles.env)
-./scripts/update.sh
+# Sync the configs into place
+dot sync
 ```
 
 ## Usage
 
-`DOTLOC` is automatically detected from the repository location when you're inside the cloned directory. Create a `.env` file in the repo root with your personal settings—it will be automatically copied to `~/.dotfiles.env` by `update.sh` and sourced by both `~/.zshenv` and `~/.zshrc`. After making edits to `.env`, rerun `./scripts/update.sh` to resync everything back into `$HOME`.
+`DOTLOC` is automatically detected from the repository location. Create a `.env` file in the repo root with your personal settings (gitignored). It's sourced by `.zshenv` on shell startup. After making changes, run `dot sync` to refresh symlinks and tools.
 
 ## Environment Variables
 
@@ -51,7 +50,7 @@ $EDITOR .env
 - `CURSOR_USER_DATA_DIR` / `CURSOR_EXTENSIONS_DIR`: Personal/Work profile directories that stay outside the repo.
 - `CLAUDE_BINARY`: Optional path to a local Claude CLI build.
 
-Create a `.env` file in the repo root (copy from `.env.example`), update the values for your machine, and keep it out of source control (already gitignored). The `update.sh` script will copy it to `~/.dotfiles.env`, which is then sourced by both `~/.zshenv` and `~/.zshrc`. `DOTLOC` is auto-detected, so you only need to set it if you want to override the default behavior. You can also set `DOTFILES_ENV_FILE` if you prefer a different location for the env file.
+Create a `.env` file in the repo root (copy from `.env.example`), update the values for your machine, and keep it out of source control (already gitignored). It's sourced by `.zshenv` on every shell startup. `DOTLOC` is auto-detected, so you only need to set it if you want to override the default behavior.
 
 ## Configuration Files
 
@@ -109,7 +108,7 @@ Feel free to explore and modify the configurations to suit your personal prefere
 **Private Files**: Both `zsh/.zsh_aliases` and Personal/Work Cursor user-data directories contain personal information and are intentionally ignored via `.gitignore`. 
 
 - Create `zsh/.zsh_aliases` (copy from `zsh/.zsh_aliases.example`) to add personal aliases that won't be committed.
-- Keep Cursor profiles outside the repository (set `CURSOR_USER_DATA_DIR` / `CURSOR_EXTENSIONS_DIR` in `~/.dotfiles.env`) to avoid accidentally committing them.
+- Keep Cursor profiles outside the repository (set `CURSOR_USER_DATA_DIR` / `CURSOR_EXTENSIONS_DIR` in `.env`) to avoid accidentally committing them.
 
 <div align="center">
   <h3>Happy Coding!</h3>
