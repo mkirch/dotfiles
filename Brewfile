@@ -67,8 +67,6 @@ brew "fontforge"
 brew "gallery-dl"
 # GNU compiler collection
 brew "gcc@11"
-# GitHub command-line tool
-brew "gh"
 # Distributed revision control system
 brew "git"
 # Quickly rewrite git repository history
@@ -101,6 +99,8 @@ brew "gstreamer"
 brew "helix"
 # Kubernetes package manager
 brew "helm"
+# Interactive process viewer
+brew "htop"
 # Run and Test HTTP Requests with plain text and curl
 brew "hurl"
 # ISO/IEC 23008-12:2017 HEIF file format decoder and encoder
@@ -183,10 +183,12 @@ brew "ranger"
 brew "raptor"
 # Ruby version manager
 brew "rbenv"
-# Rust toolchain installer
-brew "rustup"
 # CLI search and replace | Space Age seD
 brew "sad"
+# Shell script static analysis
+brew "shellcheck"
+# Shell script formatter
+brew "shfmt"
 # SMART hard drive monitoring
 brew "smartmontools"
 # Formatting technology for Swift source code
@@ -245,6 +247,8 @@ cask "calibre"
 cask "codex"
 # Browser for SQLite databases
 cask "db-browser-for-sqlite"
+# Universal database tool
+cask "dbeaver-community"
 # Launch builds and start simulators from your menu bar
 cask "expo-orbit"
 cask "font-0xproto-nerd-font"
@@ -307,63 +311,9 @@ cask "font-victor-mono-nerd-font"
 cask "font-zed-mono-nerd-font"
 # Set of tools to manage resources and applications hosted on Google Cloud
 cask "gcloud-cli"
-# Xcode extension for GitHub Copilot
-cask "github-copilot-for-xcode"
-# CLI for GitKraken
-cask "gitkraken-cli"
 # 100% open-source Java implementation
 cask "bell-sw/liberica/liberica-jdk17-full"
+# FUSE for macOS - filesystem extensions
+cask "macfuse"
 # Visual tool to design, develop and administer MySQL servers
 cask "mysqlworkbench"
-# Xcode Extension for reformatting Swift code
-cask "swiftformat-for-xcode"
-# Developer experience toolkit used to check, test, merge, and monitor code
-cask "trunk-io"
-vscode "1password.op-vscode"
-vscode "42crunch.vscode-openapi"
-vscode "anthropic.claude-code"
-vscode "anysphere.cursorpyright"
-vscode "anysphere.remote-containers"
-vscode "anysphere.remote-ssh"
-vscode "biomejs.biome"
-vscode "bradlc.vscode-tailwindcss"
-vscode "charliermarsh.ruff"
-vscode "christian-kohler.npm-intellisense"
-vscode "docker.docker"
-vscode "eamodio.gitlens"
-vscode "github.codespaces"
-vscode "github.github-vscode-theme"
-vscode "github.remotehub"
-vscode "github.vscode-github-actions"
-vscode "github.vscode-pull-request-github"
-vscode "llvm-vs-code-extensions.lldb-dap"
-vscode "mikestead.dotenv"
-vscode "ms-azuretools.vscode-docker"
-vscode "ms-dotnettools.vscode-dotnet-runtime"
-vscode "ms-edgedevtools.vscode-edge-devtools"
-vscode "ms-python.debugpy"
-vscode "ms-python.python"
-vscode "ms-toolsai.datawrangler"
-vscode "ms-toolsai.jupyter"
-vscode "ms-toolsai.jupyter-renderers"
-vscode "ms-toolsai.vscode-jupyter-cell-tags"
-vscode "ms-toolsai.vscode-jupyter-slideshow"
-vscode "ms-vscode.azure-repos"
-vscode "ms-vscode.makefile-tools"
-vscode "ms-vscode.remote-repositories"
-vscode "ms-vscode.remote-server"
-vscode "myriad-dreamin.tinymist"
-vscode "openai.chatgpt"
-vscode "posthog.posthog-vscode"
-vscode "prisma.prisma"
-vscode "redhat.vscode-yaml"
-vscode "rust-lang.rust-analyzer"
-vscode "sswg.swift-lang"
-vscode "stripe.vscode-stripe"
-vscode "swiftlang.swift-vscode"
-vscode "teabyii.ayu"
-vscode "unifiedjs.vscode-mdx"
-vscode "vadimcn.vscode-lldb"
-vscode "vercel.turbo-vsc"
-vscode "vitest.explorer"
-vscode "vscode-icons-team.vscode-icons"

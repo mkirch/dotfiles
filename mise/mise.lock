@@ -296,6 +296,10 @@ backend = "aqua:pnpm/pnpm"
 "platforms.macos-x64" = { checksum = "sha256:11cc2b5c9e6f0e1d6e2bfb414e0db3d26f07378a76c2c045ec9dbecc91050bd4", url = "https://github.com/pnpm/pnpm/releases/download/v10.28.1/pnpm-macos-x64"}
 "platforms.windows-x64" = { checksum = "sha256:6205534c0e8acd0cc3a2da48ee8a3ece33e7e170ab84880f888edca51a795312", url = "https://github.com/pnpm/pnpm/releases/download/v10.28.1/pnpm-win-x64.exe"}
 
+[[tools.rust]]
+version = "1.93.1"
+backend = "core:rust"
+
 [[tools.terraform]]
 version = "1.14.3"
 backend = "aqua:hashicorp/terraform"

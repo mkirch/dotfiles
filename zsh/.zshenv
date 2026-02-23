@@ -16,6 +16,7 @@ export DEV_HOME
 export FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=1
 export HOMEBREW_NO_ANALYTICS=1
 export NEXT_TELEMETRY_DISABLED=1
+export AZURE_DEV_COLLECT_TELEMETRY=no
 
 # Build flags (Apple Silicon)
 export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"

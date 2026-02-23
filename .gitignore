@@ -703,3 +703,4 @@ navi/cheats/tldr/
 navi/cheats/tmp/
 
 .dotfiles.env
+zsh/.zsh_aliases.zwc

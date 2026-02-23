@@ -8,6 +8,7 @@ lockfile = true  # Enable checksum verification via mise.lock
 node = "lts"
 pnpm = "latest"
 gh = "latest"
+rust = "latest"
 terraform = "latest"
 "aqua:superfly/flyctl" = "latest"
 

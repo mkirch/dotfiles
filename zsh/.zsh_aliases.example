@@ -7,10 +7,6 @@
 # alias awslogin="aws configure sso"
 # alias awsd="aws --profile <your-profile>"
 
-# OSINT / forensics tools
-# alias sherlock='uvx --from sherlock-project sherlock'
-# alias autopsy="$HOME/autopsy/<version>/bin/autopsy"
-
 # Auto-enable debug mode in project directories
 # claude() {
 #   if [[ "$PWD" == "$DEV_HOME/myproject"* ]]; then

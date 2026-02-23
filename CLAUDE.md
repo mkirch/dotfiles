@@ -4,22 +4,24 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-Personal dotfiles repository for macOS using symlink-based management. Configuration files live in this repo and are symlinked to their expected system locations.
+Personal dotfiles repository using symlink-based management. Supports macOS, Linux, WSL, and Windows (Git Bash/MSYS2). Configuration files live in this repo and are symlinked to their expected system locations.
 
 ## Commands
 
 ### Primary Management (use `dot` command)
 
 ```bash
-dot sync       # Full refresh: re-link + mise + brew + claude
-dot update     # Re-link all repo configs to system locations
+dot sync       # Full refresh: re-link + mise + brew + claude + navi
+dot update     # Pull latest + re-link repo configs to system locations
 dot bootstrap  # Fresh machine setup (links + mise + brew + claude)
 dot migrate    # Copy existing system configs into repo, then link
 dot linkall    # Apply symlinks only (repo → system)
 dot mise       # Install mise tools from mise/config.toml
 dot brew       # Install Homebrew packages from Brewfile
 dot claude     # Install/update Claude Code via native installer
+dot navi       # Clone/pull community navi cheatsheets
 dot fonts [--install|--patch]  # Install Nerd Fonts or patch SF Mono
+dot --dry-run <command>        # Preview changes without applying them
 ```
 
 ### Shell Aliases

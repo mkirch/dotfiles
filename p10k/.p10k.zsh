@@ -63,18 +63,26 @@ setopt no_aliases no_sh_glob brace_expand
   function prompt_python_uv_segment() {
     emulate -L zsh
 
-    # Detect Python project root
+    [[ -f pyproject.toml || -d .venv ]] || return
+
     local proj=""
     if [[ -f pyproject.toml ]]; then
-      proj=$(sed -n 's/^name *= *\"\\(.*\\)\"/\\1/p' pyproject.toml | head -1)
+      local line
+      while IFS= read -r line; do
+        if [[ $line == (#b)name[[:space:]]#=[[:space:]]#\"(*)\" ]]; then
+          proj=$match[1]
+          break
+        fi
+      done < pyproject.toml
     fi
+    : ${proj:=${PWD:t}}
 
-    [[ -z $proj ]] && proj=${PWD:t}
-
-    # Require a Python project marker
-    [[ ! -f pyproject.toml && ! -d .venv ]] && return
-
-    local version=$(uv python --version 2>/dev/null | awk '{print $2}')
+    local version=""
+    if [[ -f .python-version ]]; then
+      version=$(<.python-version)
+    elif (( $+commands[uv] )); then
+      version=${$(uv run python --version 2>/dev/null)#Python }
+    fi
     [[ -z $version ]] && return
 
     p10k segment -i '🐍' -t "${proj}:uv-${version}"

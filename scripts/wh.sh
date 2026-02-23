@@ -36,17 +36,21 @@ fi
 
 infile="$1"
 shift
-outdir="${infile%.*}_whisper"
 
+if [[ ! -f "$infile" ]]; then
+    echo "wh: file not found: $infile" >&2
+    exit 1
+fi
+
+outdir="${infile%.*}_whisper"
 mkdir -p "$outdir"
 
-# Build the whisper command
 run_whisper() {
     uvx --python 3.12 \
         --with 'torch==2.5.1' \
         --with 'torchaudio==2.5.1' \
         --with 'huggingface_hub==0.36.0' \
-        --with 'pyannote.audio<4.0.0' \
+        --with 'pyannote.audio>=3.1,<4.0.0' \
         --from whisper-ctranslate2 whisper-ctranslate2 \
         "$infile" \
         --device auto \
@@ -60,13 +64,13 @@ run_whisper() {
         "$@"
 }
 
-# If GLOBAL_HF_TOKEN is an op:// reference, use `op run` to resolve it
 if [[ "$GLOBAL_HF_TOKEN" == op://* ]]; then
     if ! command -v op >/dev/null 2>&1; then
         echo "wh: GLOBAL_HF_TOKEN is an op:// reference but 1Password CLI not found" >&2
         exit 1
     fi
-    exec op run -- bash -c "$(declare -f run_whisper); infile='$infile' outdir='$outdir' run_whisper $*"
+    export infile outdir
+    exec op run -- bash -c "$(declare -f run_whisper); run_whisper \"\$@\"" _ "$@"
 else
     run_whisper "$@"
 fi

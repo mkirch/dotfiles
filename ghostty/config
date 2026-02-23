@@ -1,73 +1,98 @@
 #------------------------------------------------------------------------------
-# Configuration file for Ghostty
-# MacOS: `~/Library/Application Support/com.mitchellh.ghostty/config.toml` 
+# Ghostty — macOS
+# ~/Library/Application Support/com.mitchellh.ghostty/config
 #------------------------------------------------------------------------------
 
-# Theme configuratios
+# Theme
 theme = Github Dark High Contrast
 
-# Font configuration
-font-size = 11
+# Font
+font-size = 13
 font-family = FiraCode Nerd Font Mono
 
-# Window settings
-window-height = 90	
+# Window
+window-height = 90
 window-width = 160
+window-padding-x = 6
+window-padding-y = 4
+window-save-state = always
 
-# Performance settings
-unfocused-split-opacity = 0.9
+# Splits
+unfocused-split-opacity = 0.85
 
-# Cursor settings
-cursor-style = block
-cursor-style-blink = true
-
-# Shell integration
+# Shell integration (auto-injected for zsh — do NOT also source manually in .zshrc)
 shell-integration = detect
 shell-integration-features = cursor,sudo,title
 
-# macOS specific settings
+# macOS
 macos-option-as-alt = true
 macos-titlebar-style = native
 
-# Clipboard
+# Clipboard — disable paste-protection so multi-line pastes don't trigger a dialog
 clipboard-read = allow
 clipboard-write = allow
-clipboard-paste-protection = true
-
-# Mouse settings
-mouse-hide-while-typing = true
-
-# Scrollback
-scrollback-limit = 10000
-
-# Quick Terminal (macOS)
-# Use Cmd+` to toggle quick terminal
-# Requires accessibility permissions in System Settings
-
-# Security settings
-confirm-close-surface = true
+clipboard-paste-protection = false
 copy-on-select = true
 
-# Advanced settings
-gtk-single-instance = true
+# Mouse
+mouse-hide-while-typing = true
+
+# Scrollback (100k lines — enough for long build logs and test runs)
+scrollback-limit = 100000
+
+# Quick terminal: global Cmd+` for a drop-down quake-style terminal
+keybind = global:cmd+grave_accent=toggle_quick_terminal
+
+# Close confirmation only when a subprocess is running (shell integration detects this)
+confirm-close-surface = true
+
+# Updates
 auto-update = download
 auto-update-channel = stable
 
-# URL handling
+# URLs
 link-url = true
 
-# Font features
-# Note: font-variation settings require specific font support
-# Uncomment and adjust if using a variable font
-# font-variation = wght=400
-# font-variation-bold = wght=700
-# font-variation-italic = ital=1
-# font-variation-bold-italic = wght=700 ital=1
-
-# Additional keybindings
+#------------------------------------------------------------------------------
+# Keybindings
+#------------------------------------------------------------------------------
+# Navi cheatsheet (Ctrl+N in shell)
 keybind = cmd+/=text:\x0e
+
+# Shell
 keybind = cmd+k=clear_screen
-keybind = cmd+d=new_split:right
-keybind = cmd+shift+d=new_split:down
 keybind = cmd+ctrl+f=toggle_fullscreen
 keybind = shift+enter=text:\x1b\r
+
+# Splits: create
+keybind = cmd+d=new_split:right
+keybind = cmd+shift+d=new_split:down
+
+# Splits: navigate (Option+Arrow)
+keybind = alt+left=goto_split:left
+keybind = alt+right=goto_split:right
+keybind = alt+up=goto_split:up
+keybind = alt+down=goto_split:down
+
+# Splits: resize (Option+Shift+Arrow)
+keybind = alt+shift+left=resize_split:left,40
+keybind = alt+shift+right=resize_split:right,40
+keybind = alt+shift+up=resize_split:up,40
+keybind = alt+shift+down=resize_split:down,40
+
+# Splits: zoom toggle (Option+Z)
+keybind = alt+z=toggle_split_zoom
+
+# Splits: equalize (Option+E)
+keybind = alt+e=equalize_splits
+
+# Tabs: Cmd+1..9 to jump to tab
+keybind = cmd+1=goto_tab:1
+keybind = cmd+2=goto_tab:2
+keybind = cmd+3=goto_tab:3
+keybind = cmd+4=goto_tab:4
+keybind = cmd+5=goto_tab:5
+keybind = cmd+6=goto_tab:6
+keybind = cmd+7=goto_tab:7
+keybind = cmd+8=goto_tab:8
+keybind = cmd+9=goto_tab:9

@@ -1,23 +1,29 @@
 -- Options are automatically loaded before lazy.nvim startup
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
--- Add any additional options here
 
--- Python-specific settings
--- Try to find python3, fallback to python
-vim.g.python3_host_prog = vim.fn.exepath("python3") or vim.fn.exepath("python") or ""
--- Prefer uv's python if available (uv manages Python installations)
--- Note: When working in a uv project, the autocmd will override this with the .venv python
-if vim.fn.executable("uv") == 1 then
-	-- Try to find Python via uv (silently fail if not available)
-	local handle = io.popen("uv python find --python 3.12 2>/dev/null || uv python find --python 3.11 2>/dev/null || uv python find --python 3.10 2>/dev/null || echo ''")
-	if handle then
-		local uv_python = handle:read("*a")
-		handle:close()
-		if uv_python and uv_python ~= "" then
-			uv_python = vim.fn.trim(uv_python)
-			if vim.fn.executable(uv_python) == 1 then
-				vim.g.python3_host_prog = uv_python
-			end
-		end
-	end
+-- Ghostty: set tab title to project + file for tab identification
+if vim.fn.getenv("TERM_PROGRAM") == "ghostty" then
+	vim.opt.title = true
+	vim.opt.titlestring = "%{fnamemodify(getcwd(), ':t')}%(%{expand('%:t')}%)"
 end
+
+-- Keep 8 lines of context visible above/below cursor
+vim.opt.scrolloff = 8
+vim.opt.sidescrolloff = 8
+
+-- Relative line numbers for easy jump-counting (5j, 12k, etc.)
+vim.opt.relativenumber = true
+
+-- Persistent undo across sessions (survives quitting nvim)
+vim.opt.undofile = true
+vim.opt.undolevels = 10000
+
+-- Faster completion and CursorHold triggers
+vim.opt.updatetime = 200
+
+-- Smoother experience in Ghostty (already true-color capable)
+vim.opt.termguicolors = true
+
+-- Python provider: simple lookup, no blocking shell calls
+-- The .venv/bin/python is handled by pyright's venvPath config in core.lua
+vim.g.python3_host_prog = vim.fn.exepath("python3") or vim.fn.exepath("python") or ""

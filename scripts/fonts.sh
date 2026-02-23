@@ -1,8 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 set -euo pipefail
-
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 NERD_FONT_CASKS=(
   font-0xproto-nerd-font
@@ -157,7 +155,6 @@ fi
 
 if [[ "${INSTALL_FONTS}" == "true" ]]; then
   require_cmd brew
-  brew tap homebrew/cask-fonts >/dev/null 2>&1 || true
   for font in "${NERD_FONT_CASKS[@]}"; do
     echo "Installing ${font}..."
     brew install --cask "${font}"
@@ -173,6 +170,9 @@ if [[ "${PATCH_FONTS}" == "true" ]]; then
   font_patcher_root="$(dirname "$(dirname "${font_patcher}")")"
   trap "rm -rf \"${font_patcher_root}\"" EXIT INT TERM
 
+  out_dir="$HOME/Library/Fonts/NerdPatched"
+  mkdir -p "$out_dir"
+
   patch_targets=("${PATCH_DEFAULTS[@]}" "${EXTRA_PATCH_TARGETS[@]}")
   for font in "${patch_targets[@]}"; do
     if [[ ! -f "${font}" ]]; then
@@ -180,7 +180,8 @@ if [[ "${PATCH_FONTS}" == "true" ]]; then
       continue
     fi
     echo "Patching ${font}..."
-    fontforge --complete --script "${font_patcher}" "${font}"
+    fontforge -script "${font_patcher}" --complete -out "$out_dir" "${font}"
   done
+  echo "Patched fonts saved to: $out_dir"
 fi
 

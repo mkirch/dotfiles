@@ -5,11 +5,13 @@
 #------------------------------------------------------------------------------
 # 0. Powerlevel10k instant prompt (keep at top)
 #------------------------------------------------------------------------------
+if [[ $- != *i* || ! -t 0 || ! -t 1 || ! -t 2 ]]; then
+  return
+fi
+
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
-
-[[ $- != *i* ]] && return
 
 #------------------------------------------------------------------------------
 # 1. Shell options / history
@@ -59,6 +61,8 @@ fi
 source "$HOME/.zsh/plugins/znap/znap.zsh"
 
 zstyle ':znap:*' repos-dir "$HOME/.zsh/plugins"
+# Tell znap's deferred compinit hook to ignore insecure paths non-interactively.
+zstyle ':autocomplete::compinit' arguments -i
 
 #------------------------------------------------------------------------------
 # 4. Prompt theme (Powerlevel10k via Znap)
@@ -74,10 +78,6 @@ znap source zsh-users/zsh-completions
 
 # Case-insensitive completion
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
-
-# Ensure compinit is called
-autoload -Uz compinit
-compinit -D -i -u
 
 # QoL plugins
 znap source zsh-users/zsh-autosuggestions
@@ -95,6 +95,26 @@ if [[ -r "/opt/homebrew/opt/fzf/shell/completion.zsh" ]]; then
 fi
 if [[ -r "/opt/homebrew/opt/fzf/shell/key-bindings.zsh" ]]; then
   source "/opt/homebrew/opt/fzf/shell/key-bindings.zsh"
+fi
+
+# fzf + bat: syntax-highlighted previews in fuzzy finder (Ctrl+T, Alt+C)
+export FZF_DEFAULT_OPTS="
+  --height=60% --layout=reverse --border --margin=0,1
+  --preview-window=right:50%:wrap
+  --bind='ctrl-/:toggle-preview'
+  --color=fg:#c0caf5,bg:-1,hl:#bb9af7,fg+:#c0caf5,bg+:#292e42,hl+:#7dcfff
+  --color=info:#7aa2f7,prompt:#7dcfff,pointer:#ff007c,marker:#9ece6a,spinner:#9ece6a
+"
+if (( $+commands[bat] )); then
+  export FZF_CTRL_T_OPTS="--preview 'bat --color=always --style=numbers --line-range=:300 {}'"
+fi
+if (( $+commands[eza] )); then
+  export FZF_ALT_C_OPTS="--preview 'eza --tree --level=2 --icons --color=always {}'"
+fi
+if (( $+commands[fd] )); then
+  export FZF_DEFAULT_COMMAND="fd --type f --hidden --exclude .git"
+  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+  export FZF_ALT_C_COMMAND="fd --type d --hidden --exclude .git"
 fi
 
 # navi — interactive cheatsheet (Cmd+/ in Ghostty, or type ?)
@@ -184,9 +204,12 @@ alias htop='btm --enable_gpu_memory -g -a --mem_as_value --color gruvbox \
 alias l='eza -lah --hyperlink --no-quotes -w=80 --no-user --no-permissions \
   --no-time --icons --group-directories-first --git-ignore -I .DS_Store'
 
-alias ll='eza -lah --icons=always --time-style=relative --no-user --git --git-repos --group-directories-first -I .DS_Store -O'
+alias ll='eza -lahHg --icons=always --time-style=relative --git --git-repos --group-directories-first -I .DS_Store -O --octal-permissions --total-size --no-quotes --ignore-glob ".|.."'
 alias lt='eza -Tah --icons --git-ignore --group-directories-first -I .DS_Store'
-alias llt='eza -laT --icons --git-ignore --group-directories-first -I .DS_Store'
+alias llt='eza -lahHgT --icons=always --time-style=relative --git --git-repos --group-directories-first -I .DS_Store -O --octal-permissions --total-size --no-quotes --ignore-glob ".|.."'
+alias llt3pb='llt -L 3 -I .venv,.codex,.cursor,.git --ignore-glob "__pycache__" --git-ignore | pbcopy'
+alias llt4pb='llt -L 4 -I .venv,.codex,.cursor,.git --ignore-glob "__pycache__" --git-ignore | pbcopy'
+alias llt5pb='llt -L 5 -I .venv,.codex,.cursor,.git --ignore-glob "__pycache__" --git-ignore | pbcopy'
 alias batp='bat --style plain'
 
 
@@ -302,7 +325,5 @@ pip3() { pip "$@"; }
 #------------------------------------------------------------------------------
 # Set EDITOR to actual executable path (not alias) so it works in subshells
 # Programs like git commit, sudo -e run editors in subshells where aliases aren't available
-export EDITOR="/Applications/${CURSOR_APP_NAME}.app/Contents/MacOS/Cursor"
+export EDITOR="nvim"
 export VISUAL="$EDITOR"
-
-

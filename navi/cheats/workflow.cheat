@@ -1,0 +1,195 @@
+% neovim, nvim, keybinds
+
+# Nvim: EXIT INSERT MODE (home row)
+echo "jk  — back to normal mode"
+
+# Nvim: FIND ANYTHING (files)
+echo "Space Space  — fuzzy find files"
+
+# Nvim: SEARCH KEYMAPS (forgot a keybind?)
+echo "Space s k  — search all keymaps"
+
+# Nvim: WHICH-KEY (show all leader commands)
+echo "Space  — wait 1 sec, shows all commands"
+
+# Nvim: FILE EXPLORER
+echo "Space e  — toggle file explorer"
+
+# Nvim: FIND IN FILES (grep)
+echo "Space s g  — live grep across project"
+
+# Nvim: FIND WORD UNDER CURSOR
+echo "Space s w  — search current word"
+
+# Nvim: SCROLL DOWN (centered)
+echo "Ctrl+d  — half page down, centered"
+
+# Nvim: SCROLL UP (centered)
+echo "Ctrl+u  — half page up, centered"
+
+# Nvim: NEXT SEARCH MATCH (centered)
+echo "n  — next match, screen centered"
+
+# Nvim: PREV SEARCH MATCH (centered)
+echo "N  — prev match, screen centered"
+
+# Nvim: PASTE OVER SELECTION (keeps register)
+echo "p in visual mode  — paste without yanking replaced text"
+
+# Nvim: DELETE CHAR (no yank)
+echo "x  — delete char, doesn't pollute register"
+
+# Nvim: JOIN LINES (cursor stays)
+echo "J  — join lines, cursor doesn't move"
+
+# Nvim: SAVE FILE
+echo "Ctrl+s  — save (LazyVim default)"
+
+# Nvim: CLOSE BUFFER
+echo "Space b d  — close current buffer"
+
+# Nvim: NEXT/PREV BUFFER
+echo "H / L  — previous / next buffer"
+
+# Nvim: SPLIT WINDOW
+echo "Space w s  — horizontal split  |  Space w v  — vertical split"
+
+# Nvim: MOVE BETWEEN WINDOWS
+echo "Ctrl+h/j/k/l  — move left/down/up/right between windows"
+
+# Nvim: CODE ACTIONS (LSP)
+echo "Space c a  — code actions  |  Space c r  — rename symbol"
+
+# Nvim: GO TO DEFINITION
+echo "g d  — go to definition  |  g r  — go to references"
+
+# Nvim: DIAGNOSTICS / ERRORS
+echo "Space x x  — toggle trouble (all diagnostics)"
+
+# Nvim: GIT
+echo "Space g g  — lazygit  |  Space g b  — git blame"
+
+# Nvim: TERMINAL (floating)
+echo "Space f t  — floating terminal  |  Ctrl+/  — toggle terminal"
+
+# Nvim: FORMAT FILE
+echo "Space c f  — format current file"
+
+# Nvim: UNDO / REDO
+echo "u  — undo  |  Ctrl+r  — redo"
+
+# Nvim: SELECT ALL
+echo "gg V G  — go to top, visual line, go to bottom"
+
+# Nvim: COMMENT TOGGLE
+echo "gc  — toggle comment (visual mode or gcc for line)"
+
+# Nvim: SURROUND (mini.surround)
+echo "sa  — add surround  |  sd  — delete surround  |  sr  — replace surround"
+
+# Nvim: INCREMENTAL SELECTION
+echo "Ctrl+Space  — start/expand selection  |  Backspace  — shrink"
+
+% ghostty, terminal, splits, tabs
+
+# Ghostty: NEW TAB
+echo "Cmd+T  — new tab"
+
+# Ghostty: SWITCH TAB
+echo "Cmd+1..9  — jump to tab 1-9"
+
+# Ghostty: SPLIT RIGHT
+echo "Cmd+D  — split right"
+
+# Ghostty: SPLIT DOWN
+echo "Cmd+Shift+D  — split down"
+
+# Ghostty: NAVIGATE SPLITS
+echo "Alt+Arrow  — move between splits"
+
+# Ghostty: RESIZE SPLITS
+echo "Alt+Shift+Arrow  — resize split"
+
+# Ghostty: ZOOM SPLIT
+echo "Alt+Z  — zoom/unzoom current split"
+
+# Ghostty: EQUALIZE SPLITS
+echo "Alt+E  — equalize all splits"
+
+# Ghostty: QUICK TERMINAL (global)
+echo "Cmd+\`  — toggle quake-style drop-down terminal"
+
+# Ghostty: CLEAR SCREEN
+echo "Cmd+K  — clear screen and scrollback"
+
+# Ghostty: FULLSCREEN
+echo "Cmd+Ctrl+F  — toggle fullscreen"
+
+# Ghostty: NAVI CHEATSHEET
+echo "Cmd+/  — open navi cheatsheet"
+
+% zsh, shell, aliases
+
+# Zsh: EDIT ZSHRC
+nz
+
+# Zsh: RELOAD SHELL
+rz
+
+# Zsh: HISTORY SEARCH (type partial, then arrow)
+echo "Type start of command, then Up/Down arrow  — prefix search"
+
+# Zsh: WORD JUMP (Option as Alt)
+echo "Alt+Left/Right  — jump by word  |  Alt+Backspace  — delete word"
+
+# Zsh: NAVI CHEATSHEET
+echo "?  — navi  |  ??  — tldr pages  |  how?  — cheat.sh"
+
+# Zsh: YAZI FILE MANAGER (cd on exit)
+y
+
+# Zsh: PYTHON (uv)
+echo "py script.py  — uv run python  |  pyinit  — scaffold uv project"
+
+# Zsh: TREE VIEW
+echo "l  — short list  |  ll  — full list  |  lt  — tree  |  llt  — full tree"
+
+# Zsh: FUZZY FIND FILES (with bat preview)
+echo "Ctrl+T  — fuzzy find file (syntax-highlighted preview)  |  Ctrl+/  — toggle preview"
+
+# Zsh: FUZZY CD INTO DIRECTORY (with eza tree preview)
+echo "Alt+C  — fuzzy cd into directory"
+
+# Zsh: FUZZY HISTORY
+echo "Ctrl+R  — fuzzy search command history"
+
+# Zsh: ZOXIDE (smart cd)
+echo "z <partial>  — jump to frecent dir  |  zi  — interactive fuzzy pick"
+
+% git, lazygit
+
+# Git: LAZYGIT (full TUI)
+lazygit
+
+# Git: LAZYGIT from Nvim
+echo "Space g g  — open lazygit inside Neovim"
+
+# Git: QUICK STATUS
+echo "Space g b  — git blame  |  Space g s  — git status (snacks)"
+
+% claude, ai, workflow
+
+# Claude Code: START (in project root)
+cl
+
+# Claude Code: BEST LAYOUT (Ghostty split)
+echo "1. nvim .  2. Cmd+D  3. cl  4. Alt+Arrow to switch"
+
+# Claude Code: ZOOM CLAUDE PANE (read long output)
+echo "Alt+Z  — zoom claude split  |  Alt+Z again  — unzoom"
+
+# Claude Code: QUICK QUESTION (without leaving nvim)
+echo "Cmd+\`  — quick terminal  |  cl 'question here'  |  Cmd+\` to dismiss"
+
+# Claude Code: DEBUG MODE
+cld
