@@ -22,7 +22,7 @@ unfocused-split-opacity = 0.85
 
 # Shell integration (auto-injected for zsh — do NOT also source manually in .zshrc)
 shell-integration = detect
-shell-integration-features = cursor,sudo,title
+shell-integration-features = cursor,sudo
 
 # macOS
 macos-option-as-alt = true

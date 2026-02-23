@@ -206,6 +206,7 @@ brew "tesseract-lang"
 # Kubernetes YAML manifests to Terraform HCL converter
 brew "tfk8s"
 # Display directories as trees (with optional color/HTML output)
+brew "tmux"
 brew "tree"
 # Incremental parsing library
 brew "tree-sitter"

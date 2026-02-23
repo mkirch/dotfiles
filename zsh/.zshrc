@@ -167,6 +167,11 @@ if (( $+commands[aws_completer] )); then
   complete -C aws_completer aws
 fi
 
+# Ghostty shell integration (cursor shape, prompt marking, OSC sequences)
+if [[ -n $GHOSTTY_RESOURCES_DIR ]]; then
+  source "$GHOSTTY_RESOURCES_DIR/shell-integration/zsh/ghostty-integration"
+fi
+
 znap source zsh-users/zsh-syntax-highlighting
 #------------------------------------------------------------------------------
 # 6. Extra PATH / language toolchain (interactive-only)
