@@ -274,6 +274,91 @@ mise_setup() {
 }
 
 ###############################################################################
+# BREW_INSTALL — add package(s) to Brewfile and install
+###############################################################################
+brew_install() {
+  local type="brew"
+  local pkgs=()
+
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --cask) type="cask"; shift ;;
+      -*)     warn "Unknown option: $1"; shift ;;
+      *)      pkgs+=("$1"); shift ;;
+    esac
+  done
+
+  if [[ ${#pkgs[@]} -eq 0 ]]; then
+    err "Usage: dot brew install [--cask] <package> ..."
+  fi
+
+  _init_brew_env
+
+  local brewfile="$DOTLOC/Brewfile"
+  if [[ ! -f "$brewfile" ]]; then
+    err "Brewfile not found at $brewfile"
+  fi
+
+  local changed=0
+  for pkg in "${pkgs[@]}"; do
+    # Check if already in Brewfile
+    if grep -q "^${type} \"${pkg}\"" "$brewfile"; then
+      log "Already in Brewfile: ${type} \"${pkg}\""
+      continue
+    fi
+
+    if [[ "$DRY_RUN" == "1" ]]; then
+      log "(dry-run) would add to Brewfile: ${type} \"${pkg}\""
+      continue
+    fi
+
+    # Try to get package description
+    local desc=""
+    if command -v brew >/dev/null 2>&1; then
+      desc=$(brew desc "$pkg" 2>/dev/null | sed "s/^[^:]*: //" || true)
+    fi
+
+    # Build entry lines
+    local entry
+    if [[ -n "$desc" ]]; then
+      entry="# ${desc}
+${type} \"${pkg}\""
+    else
+      entry="${type} \"${pkg}\""
+    fi
+
+    # Insert after the last line of the matching type for clean grouping
+    local last_line
+    last_line=$(grep -n "^${type} " "$brewfile" | tail -1 | cut -d: -f1)
+    if [[ -n "$last_line" ]]; then
+      local total
+      total=$(wc -l < "$brewfile")
+      {
+        head -n "$last_line" "$brewfile"
+        printf '%s\n' "$entry"
+        if [[ "$last_line" -lt "$total" ]]; then
+          tail -n +"$((last_line + 1))" "$brewfile"
+        fi
+      } > "$brewfile.tmp" && mv "$brewfile.tmp" "$brewfile"
+    else
+      printf '%s\n' "$entry" >> "$brewfile"
+    fi
+
+    log "Added to Brewfile: ${type} \"${pkg}\""
+    ((changed++))
+  done
+
+  if [[ "$changed" -gt 0 ]]; then
+    sep
+    log "Running brew bundle to install"
+    sep
+    brew bundle --file="$brewfile" || err "brew bundle failed"
+  elif [[ "$DRY_RUN" == "1" ]]; then
+    log "(dry-run) would run: brew bundle --file=$brewfile"
+  fi
+}
+
+###############################################################################
 # BREW_SETUP — install Homebrew if missing, then bundle from Brewfile
 ###############################################################################
 _init_brew_env() {
@@ -508,6 +593,9 @@ Commands:
   update            Pull latest changes + re-link repo → system
   mise              Install mise (if needed) and run mise install
   brew              Install Homebrew (if needed) and run Brewfile
+  brew install      Add package(s) to Brewfile and install them
+                      dot brew install <pkg> [pkg...]
+                      dot brew install --cask <pkg>
   claude            Install/update Claude Code via native installer
   navi              Clone/pull community navi cheatsheets
   bootstrap         Install dotfiles on a fresh machine
@@ -544,7 +632,12 @@ migrate)   migrate ;;
 update)    update ;;
 linkall)   linkall ;;
 mise)      mise_setup ;;
-brew)      brew_setup ;;
+brew)
+  case "${args[1]:-}" in
+    install) brew_install "${args[@]:2}" ;;
+    *)       brew_setup ;;
+  esac
+  ;;
 claude)    claude_setup ;;
 navi)      navi_update ;;
 fonts)     fonts "${args[@]:1}" ;;
