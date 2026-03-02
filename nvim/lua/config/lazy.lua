@@ -24,7 +24,7 @@ require("lazy").setup({
 		lazy = false,
 		version = false,
 	},
-	ui = { icons = {} },
+	ui = {},
 	install = { colorscheme = { "tokyonight", "habamax" } },
 	checker = {
 		enabled = true,

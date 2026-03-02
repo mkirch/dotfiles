@@ -4,7 +4,7 @@
 -- Ghostty: set tab title to project + file for tab identification
 if vim.fn.getenv("TERM_PROGRAM") == "ghostty" then
 	vim.opt.title = true
-	vim.opt.titlestring = "%{fnamemodify(getcwd(), ':t')}%(%{expand('%:t')}%)"
+	vim.opt.titlestring = "%{fnamemodify(getcwd(), ':t')} — %{expand('%:t')}"
 end
 
 -- Keep 8 lines of context visible above/below cursor

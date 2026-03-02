@@ -23,9 +23,6 @@ map({ "n", "v" }, "x", [["_x]], { desc = "Delete char (no yank)" })
 -- Join lines without moving cursor
 map("n", "J", "mzJ`z", { desc = "Join lines (keep cursor)" })
 
--- Quick save
-map("n", "<leader>w", "<cmd>w<cr>", { desc = "Save file" })
-
 -- Move lines up/down in visual mode (complement to LazyVim's Alt+j/k)
 map("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move selection down" })
 map("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move selection up" })
@@ -33,7 +30,3 @@ map("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move selection up" })
 -- Stay in visual mode after indent
 map("v", "<", "<gv", { desc = "Indent left (stay visual)" })
 map("v", ">", ">gv", { desc = "Indent right (stay visual)" })
-
--- Quick access to system clipboard (yank/paste to/from OS)
-map({ "n", "v" }, "<leader>y", [["+y]], { desc = "Yank to clipboard" })
-map("n", "<leader>Y", [["+Y]], { desc = "Yank line to clipboard" })

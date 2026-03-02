@@ -7,10 +7,7 @@ return {
 		},
 	},
 
-	{
-		"folke/trouble.nvim",
-		opts = { use_diagnostic_signs = true },
-	},
+	{ "folke/trouble.nvim" },
 
 	-- LSP: only configure what LazyVim extras don't handle
 	-- Python (pyright + ruff) is managed by lazyvim.plugins.extras.lang.python
@@ -134,7 +131,7 @@ return {
 			},
 			format_on_save = {
 				timeout_ms = 500,
-				lsp_fallback = true,
+				lsp_format = "fallback",
 			},
 		},
 	},

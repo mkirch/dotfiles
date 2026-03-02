@@ -240,6 +240,8 @@ brew "ggerganov/ggerganov/hnterm"
 brew "oven-sh/bun/bun"
 # Stripe CLI utility
 brew "stripe/stripe-cli/stripe"
+# CLI to manage E2B sandboxes and templates
+brew "e2b"
 # Command-line interface for 1Password
 cask "1password-cli"
 # E-books management software

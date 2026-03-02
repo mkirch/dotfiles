@@ -5,7 +5,7 @@
 if vim.fn.getenv("TERM_PROGRAM") == "ghostty" then
 	vim.api.nvim_create_autocmd("DirChanged", {
 		callback = function()
-			vim.opt.titlestring = "%{fnamemodify(getcwd(), ':t')}%(%{expand('%:t')}%)"
+			vim.opt.titlestring = "%{fnamemodify(getcwd(), ':t')} — %{expand('%:t')}"
 		end,
 	})
 end
@@ -18,12 +18,5 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.opt_local.shiftwidth = 4
 		vim.opt_local.expandtab = true
 		vim.opt_local.textwidth = 88
-	end,
-})
-
--- Highlight yanked text briefly (visual feedback)
-vim.api.nvim_create_autocmd("TextYankPost", {
-	callback = function()
-		vim.hl.on_yank({ timeout = 200 })
 	end,
 })
