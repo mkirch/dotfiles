@@ -96,3 +96,7 @@ keybind = cmd+6=goto_tab:6
 keybind = cmd+7=goto_tab:7
 keybind = cmd+8=goto_tab:8
 keybind = cmd+9=goto_tab:9
+
+#
+keybind = alt+backspace=text:\x1b\x7f
+keybind = shift+enter=text:\n

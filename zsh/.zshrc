@@ -332,3 +332,6 @@ pip3() { pip "$@"; }
 # Programs like git commit, sudo -e run editors in subshells where aliases aren't available
 export EDITOR="nvim"
 export VISUAL="$EDITOR"
+
+# opencode
+export PATH="$HOME/.opencode/bin:$PATH"
